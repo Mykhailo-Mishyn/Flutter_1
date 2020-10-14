@@ -1,7 +1,11 @@
 import 'package:Fluttegram/layout/feed/entity/post.dart';
 import 'package:Fluttegram/layout/feed/entity/story.dart';
+import 'package:Fluttegram/model/StorySeenCountModel.dart';
 import 'package:Fluttegram/util/utility.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'entity/hero_photo_story.dart';
 
 class FeedList extends StatefulWidget {
   @override
@@ -89,67 +93,66 @@ class _FeedListState extends State<FeedList> {
 
   Center dummyTestExpandedClass() {
     return Center(
-        child: Column(
-          children: <Widget>[
-            Container(
-              color: Colors.blue,
-              height: 100,
-              width: 100,
+      child: Column(
+        children: <Widget>[
+          Container(
+            color: Colors.blue,
+            height: 100,
+            width: 100,
+          ),
+          Expanded(
+            child: Icon(
+              Icons.camera_alt,
+              color: Colors.white,
+              size: 300,
             ),
-            Expanded(
-              child: Icon(
-                Icons.camera_alt,
-                color: Colors.white,
-                size: 300,
-              ),
-            ),
-            Container(
-              color: Colors.red,
-              height: 100,
-              width: 100,
-            ),
-          ],
-        ),
-      );
+          ),
+          Container(
+            color: Colors.red,
+            height: 100,
+            width: 100,
+          ),
+        ],
+      ),
+    );
   }
 
   Row dummyTestSpacerClass() {
     return Row(
-        children: <Widget>[
-          Text('1st',
-              style: TextStyle(fontFamily: 'Billabong', fontSize: 27,  color: Colors.white)),
-          Spacer(), // Defaults to a flex of one.
-          Text('2nd',
-              style: TextStyle(fontFamily: 'Billabong', fontSize: 27,  color: Colors.white)),
-          // Gives twice the space between Middle and End than Begin and Middle.
-          Spacer(flex: 2),
-          Text('3rd',
-              style: TextStyle(fontFamily: 'Billabong', fontSize: 27,  color: Colors.white)),
-        ],
-      );
+      children: <Widget>[
+        Text('1st',
+            style: TextStyle(
+                fontFamily: 'Billabong', fontSize: 27, color: Colors.white)),
+        Spacer(), // Defaults to a flex of one.
+        Text('2nd',
+            style: TextStyle(
+                fontFamily: 'Billabong', fontSize: 27, color: Colors.white)),
+        // Gives twice the space between Middle and End than Begin and Middle.
+        Spacer(flex: 2),
+        Text('3rd',
+            style: TextStyle(
+                fontFamily: 'Billabong', fontSize: 27, color: Colors.white)),
+      ],
+    );
   }
 
   Widget buildStories() {
     return SliverToBoxAdapter(
       child: Container(
-        height: 60,
+        height: 65,
         child: ListView(
           scrollDirection: Axis.horizontal,
-          children: <Widget>[
-            Story(),
-            Story(),
-            Story(),
-            Story(),
-            Story(),
-            Story(),
-            Story(),
-            Story(),
-            Story(),
-            Story(),
-          ],
+          children: _populateStoryList(),
         ),
       ),
     );
+  }
+
+  List<_ClickableStory> _populateStoryList() {
+    List<Story> stories = context.select<StorySeenModel, List<Story>>(
+      (storyModel) => storyModel.storyViewsCountMap.keys.toList(),
+    );
+    return stories.map((story) => _ClickableStory(story: story)).toList();
   }
 
   Widget buildPosts() {
@@ -158,6 +161,38 @@ class _FeedListState extends State<FeedList> {
     );
   }
 }
+
+class _ClickableStory extends StatelessWidget {
+  final Story story;
+
+  const _ClickableStory({Key key, @required this.story}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // var isAlreadySeen = context.select<StorySeenModel, bool>(
+    //   (storyModel) =>
+    //       storyModel.storiesPartitionMap[StoryActuality.SEEN].contains(story),
+    // );
+
+    return Container(
+      child: Hero(
+          tag: story.tag,
+          child: GestureDetector(
+              onTap: () {
+                final model = Provider.of<StorySeenModel>(context,  listen: false);
+                model.incrementViewCount(story.tag);
+
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => HeroPhotoStory(story.username,
+                            story.tag, Image.asset(story.contentImagePath))));
+              },
+              child: story)),
+    );
+  }
+}
+
 
 // @deprecated
 // SliverAppBar buildSliverAppBar() {
