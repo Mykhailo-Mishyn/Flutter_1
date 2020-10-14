@@ -25,7 +25,6 @@ class _StoryState extends State<Story> with SingleTickerProviderStateMixin {
   Animation reverse;
   AnimationController controller;
 
-
   /// Init
   @override
   void initState() {
@@ -75,10 +74,7 @@ class _StoryState extends State<Story> with SingleTickerProviderStateMixin {
     var color = storyAlreadySeen ? Colors.grey : Color(0XFFED4634);
 
     if (storyAlreadySeen) {
-      return CircleAvatar(
-          backgroundColor: color,
-          child: CircleAvatar(
-              backgroundImage: AssetImage(imgPath)));
+      return CircleAvatar(backgroundImage: AssetImage(imgPath));
     } else {
       return RotationTransition(
           turns: base,
