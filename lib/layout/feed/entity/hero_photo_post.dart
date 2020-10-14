@@ -1,13 +1,24 @@
+import 'package:Fluttegram/util/utility.dart';
 import 'package:flutter/material.dart';
 
-class HeroPhotoPage extends StatelessWidget {
+class HeroPhotoPage extends StatefulWidget {
   final String username;
   final String tag;
   final Image image;
   final String description;
 
-  HeroPhotoPage(this.username, this.tag, this.image, this.description);
+  ///lifting state up approach
+  final Function doLikeFunction;
+  int nLikes;
 
+  HeroPhotoPage(this.username, this.tag, this.image, this.description,
+      this.nLikes, this.doLikeFunction);
+
+  @override
+  _HeroPhotoPageState createState() => _HeroPhotoPageState();
+}
+
+class _HeroPhotoPageState extends State<HeroPhotoPage> {
   @override
   Widget build(BuildContext context) {
     double iconRadius = 100;
@@ -15,15 +26,15 @@ class HeroPhotoPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black54,
       appBar: AppBar(
-        title: Text('$username'),
+        title: Text('${widget.username}'),
       ),
       body: Column(children: <Widget>[
         Stack(
           children: [
             Container(
               child: Hero(
-                tag: '$tag',
-                child: this.image,
+                tag: '${widget.tag}',
+                child: widget.image,
               ),
             ),
             _overflowingHeartSign(context, iconRadius),
@@ -41,7 +52,7 @@ class HeroPhotoPage extends StatelessWidget {
             child: Padding(
                 padding: EdgeInsets.all(40),
                 child: Text(
-                  this.description,
+                  widget.description,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(color: Colors.white),
                 )))
@@ -52,40 +63,60 @@ class HeroPhotoPage extends StatelessWidget {
 
   Positioned _overflowingHeartSign(BuildContext context, double iconRadius) {
     return Positioned(
-            left: (MediaQuery.of(context).size.width / 2) - iconRadius,
-            top: iconRadius,
-            child: Icon(
-              Icons.favorite_border,
-              color: Color.fromRGBO(255, 255, 255, 0.35),
-              size: iconRadius * 2,
-            ),
-          );
+      left: (MediaQuery
+          .of(context)
+          .size
+          .width / 2) - iconRadius,
+      top: iconRadius,
+      child: FlatButton(
+          onPressed: () {
+            int randomLikeQuantity = Utility.next(1, 10);
+            setState(() {
+              widget.nLikes += randomLikeQuantity;
+            });
+            widget.doLikeFunction(randomLikeQuantity);
+          },
+          child: Icon(
+            Icons.favorite_border,
+            color: Color.fromRGBO(255, 255, 255, 0.35),
+            size: iconRadius * 2,
+          )),
+    );
   }
 
   List<Widget> _commentLikeDirect() {
     return [
-            IconButton(
-              icon: Icon(
-                Icons.favorite,
-                color: Colors.white,
-              ),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.mode_comment,
-                color: Colors.white,
-              ),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.send,
-                color: Colors.white,
-              ),
-              onPressed: () {},
-            ),
-          ];
+      IconButton(
+          icon: Icon(
+            Icons.favorite,
+            color: widget.nLikes == 0 ? Colors.white : Colors.red,
+          ),
+          onPressed: () {
+            setState(() {
+              widget.nLikes += 1;
+            });
+            widget.doLikeFunction(1);
+          },
+      ),
+      Text(
+        'Likes: ${widget.nLikes}',
+        style: TextStyle(color: widget.nLikes == 0 ? Colors.white : Colors.red),
+      ),
+      IconButton(
+        icon: Icon(
+          Icons.mode_comment,
+          color: Colors.white,
+        ),
+        onPressed: () {},
+      ),
+      IconButton(
+        icon: Icon(
+          Icons.send,
+          color: Colors.white,
+        ),
+        onPressed: () {},
+      ),
+    ];
   }
 
   FloatingActionButton _downloadBtn() {

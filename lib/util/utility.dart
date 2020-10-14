@@ -9,6 +9,11 @@ class Utility {
 
   static String getRandomTag(int length) => String.fromCharCodes(Iterable.generate(
       length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
+
+
+  /// Generates a positive random integer uniformly distributed on the range
+  /// from [min], inclusive, to [max], exclusive.
+  static int next(int min, int max) => min + _rnd.nextInt(max - min);
 }
 
 class BlackPrimary{

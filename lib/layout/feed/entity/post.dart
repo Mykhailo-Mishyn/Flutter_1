@@ -12,6 +12,8 @@ class Post extends StatefulWidget {
   final String postedTime;
   final String tag;
 
+  int nLikes = 0;
+
   Post(
       [this.username = "st-hol",
       this.userImagePath = "assets/images/avatar.jpg",
@@ -25,6 +27,7 @@ class Post extends StatefulWidget {
 }
 
 class _PostState extends State<Post> {
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -70,6 +73,12 @@ class _PostState extends State<Post> {
     );
   }
 
+  void doLikeFunction(int nLikes) {
+    setState(() {
+      widget.nLikes += nLikes;
+    });
+  }
+
   Widget buildContent() {
     return Column(
       children: <Widget>[
@@ -84,7 +93,9 @@ class _PostState extends State<Post> {
                               widget.username,
                               widget.tag,
                               Image.asset(widget.contentImagePath),
-                              widget.description))),
+                              widget.description,
+                              widget.nLikes,
+                              doLikeFunction))),
                   child: Image.asset(widget.contentImagePath))),
         ),
         buildInteractionRow()
@@ -101,9 +112,15 @@ class _PostState extends State<Post> {
             IconButton(
               icon: Icon(
                 Icons.favorite_border,
-                color: Colors.white,
+                color: widget.nLikes == 0 ? Colors.white : Colors.red,
               ),
-              onPressed: () {},
+              onPressed: () {
+                doLikeFunction(1);
+              },
+            ),
+            Text(
+              'Likes: ${widget.nLikes}',
+              style: TextStyle(color: widget.nLikes == 0 ? Colors.white : Colors.red),
             ),
             IconButton(
               icon: Icon(
@@ -178,4 +195,3 @@ class _PostState extends State<Post> {
     );
   }
 }
-
