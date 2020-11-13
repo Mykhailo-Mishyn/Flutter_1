@@ -1,6 +1,7 @@
 import 'package:Fluttegram/layout/feed/entity/post.dart';
 import 'package:Fluttegram/layout/feed/entity/story.dart';
 import 'package:Fluttegram/model/StorySeenCountModel.dart';
+import 'package:Fluttegram/theme/ThemeSettings.dart';
 import 'package:Fluttegram/util/utility.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,14 +24,18 @@ class _FeedListState extends State<FeedList> {
 
   @override
   Widget build(BuildContext context) {
+    var isDarkThemeActive =
+        context.select<ThemeNotifier, bool>((th) => th.isDarkTheme);
     return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: BlackPrimary.primaryBlack,
-      ),
+      theme: isDarkThemeActive ? dark : light,
+      // theme: ThemeData(
+      //   primarySwatch: BlackPrimary.primaryBlack,
+      // ),
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
-          backgroundColor: Colors.black54,
+          backgroundColor:
+              Utility.defineColorDependingOnTheme(isDarkThemeActive),
           appBar: AppBar(
             title: _buildTabBar(),
           ),
@@ -41,6 +46,8 @@ class _FeedListState extends State<FeedList> {
   }
 
   TabBar _buildTabBar() {
+    var isDarkThemeActive =
+        context.select<ThemeNotifier, bool>((th) => th.isDarkTheme);
     return TabBar(
       indicatorColor: Colors.transparent,
       labelPadding: EdgeInsets.symmetric(horizontal: 0),
@@ -50,21 +57,23 @@ class _FeedListState extends State<FeedList> {
             child: Tab(
                 icon: Icon(
               Icons.camera_alt,
-              color: Colors.white,
             ))),
         Align(
             alignment: Alignment.center,
             child: Tab(
                 icon: Text(
               'Fluttergram',
-              style: TextStyle(fontFamily: 'Billabong', fontSize: 27),
+              style: TextStyle(
+                  fontFamily: 'Billabong',
+                  fontSize: 27,
+                  color:
+                      Utility.defineColorDependingOnTheme(!isDarkThemeActive)),
             ))),
         Align(
             alignment: Alignment.centerRight,
             child: Tab(
                 icon: Icon(
               Icons.send,
-              color: Colors.white,
             ))),
       ],
     );
@@ -79,6 +88,19 @@ class _FeedListState extends State<FeedList> {
         //main
         CustomScrollView(
           slivers: <Widget>[
+            SliverToBoxAdapter(
+                child: Consumer<ThemeNotifier>(
+                    builder: (context, notifier, child) => SwitchListTile(
+                          inactiveTrackColor: BlackPrimary.primaryBlack,
+                          activeTrackColor: Colors.white,
+                          inactiveThumbColor: Colors.grey,
+                          activeColor: Colors.red,
+                          title: Text("Dark Mode"),
+                          onChanged: (value) {
+                            notifier.toggleTheme();
+                          },
+                          value: notifier.isDarkTheme,
+                        ))),
             //buildSliverAppBar(),
             buildStories(),
             buildPosts(),
@@ -103,7 +125,6 @@ class _FeedListState extends State<FeedList> {
           Expanded(
             child: Icon(
               Icons.camera_alt,
-              color: Colors.white,
               size: 300,
             ),
           ),
@@ -122,16 +143,22 @@ class _FeedListState extends State<FeedList> {
       children: <Widget>[
         Text('1st',
             style: TextStyle(
-                fontFamily: 'Billabong', fontSize: 27, color: Colors.white)),
+              fontFamily: 'Billabong',
+              fontSize: 27,
+            )),
         Spacer(), // Defaults to a flex of one.
         Text('2nd',
             style: TextStyle(
-                fontFamily: 'Billabong', fontSize: 27, color: Colors.white)),
+              fontFamily: 'Billabong',
+              fontSize: 27,
+            )),
         // Gives twice the space between Middle and End than Begin and Middle.
         Spacer(flex: 2),
         Text('3rd',
             style: TextStyle(
-                fontFamily: 'Billabong', fontSize: 27, color: Colors.white)),
+              fontFamily: 'Billabong',
+              fontSize: 27,
+            )),
       ],
     );
   }
@@ -179,7 +206,8 @@ class _ClickableStory extends StatelessWidget {
           tag: story.tag,
           child: GestureDetector(
               onTap: () {
-                final model = Provider.of<StorySeenModel>(context,  listen: false);
+                final model =
+                    Provider.of<StorySeenModel>(context, listen: false);
                 model.incrementViewCount(story.tag);
 
                 Navigator.push(
@@ -192,7 +220,6 @@ class _ClickableStory extends StatelessWidget {
     );
   }
 }
-
 
 // @deprecated
 // SliverAppBar buildSliverAppBar() {

@@ -1,4 +1,6 @@
 import 'package:Fluttegram/model/StorySeenCountModel.dart';
+import 'package:Fluttegram/theme/ThemeSettings.dart';
+import 'package:Fluttegram/util/utility.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,8 +13,10 @@ class HeroPhotoStory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isDarkThemeActive =
+    context.select<ThemeNotifier, bool>((th) => th.isDarkTheme);
     return Scaffold(
-      backgroundColor: Colors.black54,
+      backgroundColor: Utility.defineColorDependingOnTheme(isDarkThemeActive),
       appBar: AppBar(
         title: Text('$username'),
       ),
@@ -26,7 +30,7 @@ class HeroPhotoStory extends StatelessWidget {
         Text(
           "view count: " + _populateViewsCount(context, tag),
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Utility.defineColorDependingOnTheme(isDarkThemeActive)),
         )
       ]),
       floatingActionButton: _markStorySeenBtn(context, tag),
@@ -56,29 +60,29 @@ class HeroPhotoStory extends StatelessWidget {
     return model.getViewsCountByStoryTag(storyTag).toString();
   }
 
-  List<Widget> _commentLikeDirect() {
-    return [
-      IconButton(
-        icon: Icon(
-          Icons.favorite,
-          color: Colors.white,
-        ),
-        onPressed: () {},
-      ),
-      IconButton(
-        icon: Icon(
-          Icons.mode_comment,
-          color: Colors.white,
-        ),
-        onPressed: () {},
-      ),
-      IconButton(
-        icon: Icon(
-          Icons.send,
-          color: Colors.white,
-        ),
-        onPressed: () {},
-      ),
-    ];
-  }
+  // List<Widget> _commentLikeDirect() {
+  //   return [
+  //     IconButton(
+  //       icon: Icon(
+  //         Icons.favorite,
+  //         color: Utility.defineColorDependingOnTheme(isDarkThemeActive),
+  //       ),
+  //       onPressed: () {},
+  //     ),
+  //     IconButton(
+  //       icon: Icon(
+  //         Icons.mode_comment,
+  //         color: Utility.defineColorDependingOnTheme(isDarkThemeActive),
+  //       ),
+  //       onPressed: () {},
+  //     ),
+  //     IconButton(
+  //       icon: Icon(
+  //         Icons.send,
+  //         color: Utility.defineColorDependingOnTheme(isDarkThemeActive),
+  //       ),
+  //       onPressed: () {},
+  //     ),
+  //   ];
+  // }
 }

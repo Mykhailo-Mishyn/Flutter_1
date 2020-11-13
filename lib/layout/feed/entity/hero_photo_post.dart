@@ -1,5 +1,7 @@
+import 'package:Fluttegram/theme/ThemeSettings.dart';
 import 'package:Fluttegram/util/utility.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HeroPhotoPage extends StatefulWidget {
   final String username;
@@ -22,9 +24,10 @@ class _HeroPhotoPageState extends State<HeroPhotoPage> {
   @override
   Widget build(BuildContext context) {
     double iconRadius = 100;
+    final model = Provider.of<ThemeNotifier>(context,  listen: false);
 
     return Scaffold(
-      backgroundColor: Colors.black54,
+      backgroundColor: Utility.defineColorDependingOnTheme(model.isDarkTheme),
       appBar: AppBar(
         title: Text('${widget.username}'),
       ),
@@ -54,7 +57,9 @@ class _HeroPhotoPageState extends State<HeroPhotoPage> {
                 child: Text(
                   widget.description,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                      color:
+                          Utility.defineColorDependingOnTheme(model.isDarkTheme)),
                 )))
       ]),
       floatingActionButton: _downloadBtn(),
@@ -63,10 +68,7 @@ class _HeroPhotoPageState extends State<HeroPhotoPage> {
 
   Positioned _overflowingHeartSign(BuildContext context, double iconRadius) {
     return Positioned(
-      left: (MediaQuery
-          .of(context)
-          .size
-          .width / 2) - iconRadius,
+      left: (MediaQuery.of(context).size.width / 2) - iconRadius,
       top: iconRadius,
       child: FlatButton(
           onPressed: () {
@@ -85,34 +87,40 @@ class _HeroPhotoPageState extends State<HeroPhotoPage> {
   }
 
   List<Widget> _commentLikeDirect() {
+    final model = Provider.of<ThemeNotifier>(context,  listen: false);
     return [
       IconButton(
-          icon: Icon(
-            Icons.favorite,
-            color: widget.nLikes == 0 ? Colors.white : Colors.red,
-          ),
-          onPressed: () {
-            setState(() {
-              widget.nLikes += 1;
-            });
-            widget.doLikeFunction(1);
-          },
+        icon: Icon(
+          Icons.favorite,
+          color: widget.nLikes == 0
+              ? Utility.defineColorDependingOnTheme(model.isDarkTheme)
+              : Colors.red,
+        ),
+        onPressed: () {
+          setState(() {
+            widget.nLikes += 1;
+          });
+          widget.doLikeFunction(1);
+        },
       ),
       Text(
         'Likes: ${widget.nLikes}',
-        style: TextStyle(color: widget.nLikes == 0 ? Colors.white : Colors.red),
+        style: TextStyle(
+            color: widget.nLikes == 0
+                ? Utility.defineColorDependingOnTheme(model.isDarkTheme)
+                : Colors.red),
       ),
       IconButton(
         icon: Icon(
           Icons.mode_comment,
-          color: Colors.white,
+          color: Utility.defineColorDependingOnTheme(model.isDarkTheme),
         ),
         onPressed: () {},
       ),
       IconButton(
         icon: Icon(
           Icons.send,
-          color: Colors.white,
+          color: Utility.defineColorDependingOnTheme(model.isDarkTheme),
         ),
         onPressed: () {},
       ),
