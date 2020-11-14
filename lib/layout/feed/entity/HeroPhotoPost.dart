@@ -93,7 +93,7 @@ class _HeroPhotoPageState extends State<HeroPhotoPage> {
         icon: Icon(
           Icons.favorite,
           color: widget.nLikes == 0
-              ? Utility.defineColorDependingOnTheme(model.isDarkTheme)
+              ? Utility.defineColorDependingOnTheme(!model.isDarkTheme)
               : Colors.red,
         ),
         onPressed: () {
@@ -107,20 +107,18 @@ class _HeroPhotoPageState extends State<HeroPhotoPage> {
         'Likes: ${widget.nLikes}',
         style: TextStyle(
             color: widget.nLikes == 0
-                ? Utility.defineColorDependingOnTheme(model.isDarkTheme)
+                ? Utility.defineColorDependingOnTheme(!model.isDarkTheme)
                 : Colors.red),
       ),
       IconButton(
         icon: Icon(
           Icons.mode_comment,
-          color: Utility.defineColorDependingOnTheme(model.isDarkTheme),
         ),
         onPressed: () {},
       ),
       IconButton(
         icon: Icon(
           Icons.send,
-          color: Utility.defineColorDependingOnTheme(model.isDarkTheme),
         ),
         onPressed: () {},
       ),
