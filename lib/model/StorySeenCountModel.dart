@@ -1,4 +1,4 @@
-import 'package:Fluttegram/layout/feed/entity/story.dart';
+import 'package:Fluttegram/layout/feed/entity/Story.dart';
 import 'package:flutter/foundation.dart';
 
 class StorySeenModel extends ChangeNotifier {

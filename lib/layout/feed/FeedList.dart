@@ -1,12 +1,13 @@
-import 'package:Fluttegram/layout/feed/entity/post.dart';
-import 'package:Fluttegram/layout/feed/entity/story.dart';
+import 'package:Fluttegram/layout/feed/entity/DiscoverWorldPostsPage.dart';
+import 'package:Fluttegram/layout/feed/entity/Post.dart';
+import 'package:Fluttegram/layout/feed/entity/Story.dart';
 import 'package:Fluttegram/model/StorySeenCountModel.dart';
 import 'package:Fluttegram/theme/ThemeSettings.dart';
-import 'package:Fluttegram/util/utility.dart';
+import 'package:Fluttegram/util/Utility.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'entity/hero_photo_story.dart';
+import 'entity/HeroPhotoStory.dart';
 
 class FeedList extends StatefulWidget {
   @override
@@ -108,7 +109,7 @@ class _FeedListState extends State<FeedList> {
         ),
 
         //right
-        dummyTestSpacerClass()
+        PostsPage()
       ],
     );
   }
@@ -138,30 +139,6 @@ class _FeedListState extends State<FeedList> {
     );
   }
 
-  Row dummyTestSpacerClass() {
-    return Row(
-      children: <Widget>[
-        Text('1st',
-            style: TextStyle(
-              fontFamily: 'Billabong',
-              fontSize: 27,
-            )),
-        Spacer(), // Defaults to a flex of one.
-        Text('2nd',
-            style: TextStyle(
-              fontFamily: 'Billabong',
-              fontSize: 27,
-            )),
-        // Gives twice the space between Middle and End than Begin and Middle.
-        Spacer(flex: 2),
-        Text('3rd',
-            style: TextStyle(
-              fontFamily: 'Billabong',
-              fontSize: 27,
-            )),
-      ],
-    );
-  }
 
   Widget buildStories() {
     return SliverToBoxAdapter(

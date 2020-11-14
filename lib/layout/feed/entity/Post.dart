@@ -1,10 +1,11 @@
 import 'package:Fluttegram/theme/ThemeSettings.dart';
-import 'package:Fluttegram/util/utility.dart';
+import 'package:Fluttegram/util/Utility.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'hero_photo_post.dart';
+import 'HeroPhotoPost.dart';
+import 'ReactionsScreen.dart';
 
 class Post extends StatefulWidget {
   final String username;
@@ -14,13 +15,26 @@ class Post extends StatefulWidget {
   final String postedTime;
   final String tag;
 
+  final bool isImageSrcNetwork;
+  Image userImage;
+  Image contentImage;
+
   int nLikes = 0;
 
   Post(
       [this.username = "st-hol",
       this.userImagePath = "assets/images/avatar.jpg",
       this.contentImagePath = "assets/images/post.jpg",
+      this.isImageSrcNetwork = false,
       this.description = " Having rest in the woods :)",
+      this.postedTime = "3 hours ago"])
+      : this.tag = Utility.getRandomTag(9);
+
+  Post.customized(
+      this.description, this.username, this.userImage, this.contentImage,
+      [this.userImagePath = "",
+      this.contentImagePath = "",
+      this.isImageSrcNetwork = true,
       this.postedTime = "3 hours ago"])
       : this.tag = Utility.getRandomTag(9);
 
@@ -29,7 +43,6 @@ class Post extends StatefulWidget {
 }
 
 class _PostState extends State<Post> {
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -45,6 +58,18 @@ class _PostState extends State<Post> {
         ));
   }
 
+  Image _buildAvatar() {
+    return widget.isImageSrcNetwork
+        ? widget.userImage
+        : Image.asset(widget.userImagePath);
+  }
+
+  Image _buildContentPhoto() {
+    return widget.isImageSrcNetwork
+        ? widget.contentImage
+        : Image.asset(widget.contentImagePath);
+  }
+
   Widget buildPostHeader() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
@@ -53,7 +78,7 @@ class _PostState extends State<Post> {
         children: <Widget>[
           Row(
             children: <Widget>[
-              CircleAvatar(backgroundImage: AssetImage(widget.userImagePath)),
+              CircleAvatar(child: ClipOval(child:_buildAvatar())),
               Container(
                 margin: EdgeInsets.only(left: 10),
                 child: Text(
@@ -92,11 +117,11 @@ class _PostState extends State<Post> {
                           builder: (context) => HeroPhotoPage(
                               widget.username,
                               widget.tag,
-                              Image.asset(widget.contentImagePath),
+                              _buildContentPhoto(),
                               widget.description,
                               widget.nLikes,
                               doLikeFunction))),
-                  child: Image.asset(widget.contentImagePath))),
+                  child: _buildContentPhoto())),
         ),
         buildInteractionRow()
       ],
@@ -104,7 +129,7 @@ class _PostState extends State<Post> {
   }
 
   Widget buildInteractionRow() {
-    final model = Provider.of<ThemeNotifier>(context,  listen: false);
+    final model = Provider.of<ThemeNotifier>(context, listen: false);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -113,7 +138,9 @@ class _PostState extends State<Post> {
             IconButton(
               icon: Icon(
                 Icons.favorite_border,
-                color: widget.nLikes == 0 ? Utility.defineColorDependingOnTheme(!model.isDarkTheme) : Colors.red,
+                color: widget.nLikes == 0
+                    ? Utility.defineColorDependingOnTheme(!model.isDarkTheme)
+                    : Colors.red,
               ),
               onPressed: () {
                 doLikeFunction(1);
@@ -121,7 +148,18 @@ class _PostState extends State<Post> {
             ),
             Text(
               'Likes: ${widget.nLikes}',
-              style: TextStyle(color: widget.nLikes == 0 ? Utility.defineColorDependingOnTheme(!model.isDarkTheme) : Colors.red),
+              style: TextStyle(
+                  color: widget.nLikes == 0
+                      ? Utility.defineColorDependingOnTheme(!model.isDarkTheme)
+                      : Colors.red),
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.important_devices, //reactions
+              ),
+              onPressed: () {
+                _navigateToReactions(context);
+              },
             ),
             IconButton(
               icon: Icon(
@@ -142,14 +180,26 @@ class _PostState extends State<Post> {
             Icons.bookmark_border,
           ),
           onPressed: () {},
-        )
+        ),
       ],
     );
   }
 
+  void _navigateToReactions(BuildContext context) async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ReactionScreen()),
+    );
+
+    // hide previous snackbar and show the new result.
+    Scaffold.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(SnackBar(
+          content:
+          Text("You reacted with [" + "$result" + "] on this Story.")));
+  }
+
   Widget buildSubtitle() {
-    var isDarkThemeActive =
-    context.select<ThemeNotifier, bool>((th) => th.isDarkTheme);
     return Container(
       margin: EdgeInsets.all(10),
       child: Row(

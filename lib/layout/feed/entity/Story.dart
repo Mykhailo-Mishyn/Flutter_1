@@ -1,6 +1,6 @@
 import 'package:Fluttegram/model/StorySeenCountModel.dart';
 import 'package:Fluttegram/theme/ThemeSettings.dart';
-import 'package:Fluttegram/util/utility.dart';
+import 'package:Fluttegram/util/Utility.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:dashed_circle/dashed_circle.dart';

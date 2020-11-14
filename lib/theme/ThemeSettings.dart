@@ -1,4 +1,4 @@
-import 'package:Fluttegram/util/utility.dart';
+import 'package:Fluttegram/util/Utility.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,6 +13,7 @@ ThemeData dark = ThemeData(
   brightness: Brightness.dark,
   primarySwatch: BlackPrimary.primaryBlack,
   accentColor: Colors.red,
+  scaffoldBackgroundColor: BlackPrimary.primaryBlack
 );
 
 class ThemeNotifier extends ChangeNotifier {

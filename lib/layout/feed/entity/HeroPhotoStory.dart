@@ -1,8 +1,10 @@
 import 'package:Fluttegram/model/StorySeenCountModel.dart';
 import 'package:Fluttegram/theme/ThemeSettings.dart';
-import 'package:Fluttegram/util/utility.dart';
+import 'package:Fluttegram/util/Utility.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'ReactionsScreen.dart';
 
 class HeroPhotoStory extends StatelessWidget {
   final String username;
@@ -14,7 +16,7 @@ class HeroPhotoStory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var isDarkThemeActive =
-    context.select<ThemeNotifier, bool>((th) => th.isDarkTheme);
+        context.select<ThemeNotifier, bool>((th) => th.isDarkTheme);
     return Scaffold(
       backgroundColor: Utility.defineColorDependingOnTheme(isDarkThemeActive),
       appBar: AppBar(
@@ -30,7 +32,7 @@ class HeroPhotoStory extends StatelessWidget {
         Text(
           "view count: " + _populateViewsCount(context, tag),
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(color: Utility.defineColorDependingOnTheme(isDarkThemeActive)),
+          // style: TextStyle(color: Utility.defineColorDependingOnTheme(!isDarkThemeActive)),
         )
       ]),
       floatingActionButton: _markStorySeenBtn(context, tag),
@@ -46,7 +48,7 @@ class HeroPhotoStory extends StatelessWidget {
 
     return FloatingActionButton(
       onPressed: () {
-        final model = Provider.of<StorySeenModel>(context,  listen: false);
+        final model = Provider.of<StorySeenModel>(context, listen: false);
         model.seeTheStoryByTag(tag);
       },
       tooltip: 'mark as seen',
@@ -60,29 +62,29 @@ class HeroPhotoStory extends StatelessWidget {
     return model.getViewsCountByStoryTag(storyTag).toString();
   }
 
-  // List<Widget> _commentLikeDirect() {
-  //   return [
-  //     IconButton(
-  //       icon: Icon(
-  //         Icons.favorite,
-  //         color: Utility.defineColorDependingOnTheme(isDarkThemeActive),
-  //       ),
-  //       onPressed: () {},
-  //     ),
-  //     IconButton(
-  //       icon: Icon(
-  //         Icons.mode_comment,
-  //         color: Utility.defineColorDependingOnTheme(isDarkThemeActive),
-  //       ),
-  //       onPressed: () {},
-  //     ),
-  //     IconButton(
-  //       icon: Icon(
-  //         Icons.send,
-  //         color: Utility.defineColorDependingOnTheme(isDarkThemeActive),
-  //       ),
-  //       onPressed: () {},
-  //     ),
-  //   ];
-  // }
+// List<Widget> _commentLikeDirect() {
+//   return [
+//     IconButton(
+//       icon: Icon(
+//         Icons.favorite,
+//         color: Utility.defineColorDependingOnTheme(isDarkThemeActive),
+//       ),
+//       onPressed: () {},
+//     ),
+//     IconButton(
+//       icon: Icon(
+//         Icons.mode_comment,
+//         color: Utility.defineColorDependingOnTheme(isDarkThemeActive),
+//       ),
+//       onPressed: () {},
+//     ),
+//     IconButton(
+//       icon: Icon(
+//         Icons.send,
+//         color: Utility.defineColorDependingOnTheme(isDarkThemeActive),
+//       ),
+//       onPressed: () {},
+//     ),
+//   ];
+// }
 }

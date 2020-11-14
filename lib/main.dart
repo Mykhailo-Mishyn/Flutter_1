@@ -1,7 +1,7 @@
-import 'package:Fluttegram/layout/feed/feed_list.dart';
+import 'package:Fluttegram/layout/feed/FeedList.dart';
 import 'package:Fluttegram/model/StorySeenCountModel.dart';
 import 'package:Fluttegram/theme/ThemeSettings.dart';
-import 'package:Fluttegram/util/utility.dart';
+import 'package:Fluttegram/util/Utility.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
         child: Consumer<ThemeNotifier>(
           builder: (context, ThemeNotifier notifier, child) {
             return MaterialApp(
+              debugShowCheckedModeBanner: false,
               title: 'st-hol instagram copy (fluttergram)',
               theme: notifier.isDarkTheme ? dark : light,
               // theme: ThemeData(
