@@ -185,18 +185,18 @@ class _PostState extends State<Post> {
     );
   }
 
-  void _navigateToReactions(BuildContext context) async {
-    final result = await Navigator.push(
+  ///hide previous snackbar and show the new result.
+  void _navigateToReactions(BuildContext context) {
+    Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => ReactionScreen()),
-    );
-
-    // hide previous snackbar and show the new result.
-    Scaffold.of(context)
+    ).then((value) => Scaffold.of(context)
       ..removeCurrentSnackBar()
       ..showSnackBar(SnackBar(
           content:
-          Text("You reacted with [" + "$result" + "] on this Story.")));
+              Text("You reacted with [" + "$value" + "] on this Post."))))
+    .catchError((err) => throw "Can not make reaction.");
+
   }
 
   Widget buildSubtitle() {

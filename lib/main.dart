@@ -5,16 +5,19 @@ import 'package:Fluttegram/util/Utility.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'routing/AppRoutes.dart';
+import 'routing/UndefinedView.dart';
+
 void main() {
-  runApp(MyApp());
+  runApp(FluttergramApp());
 }
 
-class MyApp extends StatefulWidget {
+class FluttergramApp extends StatefulWidget {
   @override
-  _TabsScreenState createState() => _TabsScreenState();
+  _FluttergramAppState createState() => _FluttergramAppState();
 }
 
-class _TabsScreenState extends State<MyApp> {
+class _FluttergramAppState extends State<FluttergramApp> {
   int _currentIndex = 0;
 
   final _feedScreen = GlobalKey<NavigatorState>();
@@ -72,11 +75,11 @@ class _TabsScreenState extends State<MyApp> {
                 items: [
                   BottomNavigationBarItem(
                     icon: Icon(Icons.library_books),
-                    title: Text('Library'),
+                    title: Text('Main'),
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.list),
-                    title: Text('Playlists'),
+                    title: Text('Diagram'),
                   ),
                 ],
               ),
@@ -103,74 +106,4 @@ class _TabsScreenState extends State<MyApp> {
     }
   }
 }
-
-Route<dynamic> generateRouteForDiagramsScreen(RouteSettings settings) {
-  switch (settings.name) {
-    case '/':
-      return MaterialPageRoute(builder: (context) => Text('1')); //InitialDiagramScreen(),
-    case 'b':
-      return MaterialPageRoute(builder: (context) => Text('2'));
-    default:
-      return MaterialPageRoute(builder: (context) => UndefinedView(name: settings.name,));
-  }
-}
-
-class UndefinedView extends StatelessWidget {
-  final String name;
-  const UndefinedView({Key key, this.name}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text('Route for $name is not defined'),
-      ),
-    );
-  }
-}
-
-// @override
-// Widget build(BuildContext context) {
-//   return MultiProvider(
-//       providers: [
-//         ChangeNotifierProvider(
-//           create: (_) => ThemeNotifier(),
-//         ),
-//         ChangeNotifierProvider<StorySeenModel>(
-//             create: (context) => StorySeenModel()),
-//       ],
-//       child: Consumer<ThemeNotifier>(
-//         builder: (context, ThemeNotifier notifier, child) {
-//           return MaterialApp(
-//             debugShowCheckedModeBanner: false,
-//             title: 'st-hol instagram copy (fluttergram)',
-//             theme: notifier.isDarkTheme ? dark : light,
-//             // theme: ThemeData(
-//             //   primarySwatch: BlackPrimary.primaryBlack,
-//             //   visualDensity: VisualDensity.adaptivePlatformDensity,
-//             // ),
-//             home: FeedList(),
-//           );
-//         },
-//       ));
-// }
-
-
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return ChangeNotifierProvider(
-//       create: (_) => ThemeNotifier(),
-//       child: Consumer<ThemeNotifier>(
-//         builder: (context, notifier, child) {
-//           return MaterialApp(
-//             title: "Flutter Provider",
-//             theme: notifier.darkTheme ? dark : light,
-//             home: FeedList(),
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
 
