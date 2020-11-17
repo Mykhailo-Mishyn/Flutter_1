@@ -87,23 +87,9 @@ class _FluttergramAppState extends State<FluttergramApp> {
   }
 
   void _onTap(int val, BuildContext context) {
-    if (_currentIndex == val) {
-      switch (val) {
-        case 0:
-          _feedScreen.currentState.popUntil((route) => route.isFirst);
-          break;
-        case 1:
-          _diagramScreen.currentState.popUntil((route) => route.isFirst);
-          break;
-        default:
-      }
-    } else {
-      if (mounted) {
         setState(() {
           _currentIndex = val;
         });
-      }
-    }
   }
 }
 

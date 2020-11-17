@@ -76,7 +76,6 @@ class Bar {
   Tween<Bar> tweenTo(Bar other) => BarTween(this, other);
 
   static Bar lerp(Bar begin, Bar end, double t) {
-    assert(begin.rank == end.rank);
     return Bar(
       begin.rank,
       lerpDouble(begin.x, end.x, t),
@@ -88,9 +87,7 @@ class Bar {
 }
 
 class BarTween extends Tween<Bar> {
-  BarTween(Bar begin, Bar end) : super(begin: begin, end: end) {
-    assert(begin.rank == end.rank);
-  }
+  BarTween(Bar begin, Bar end) : super(begin: begin, end: end);
 
   @override
   Bar lerp(double t) => Bar.lerp(begin, end, t);
