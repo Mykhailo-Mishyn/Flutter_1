@@ -15,10 +15,10 @@ class Post extends StatefulWidget {
   int nLikes = 0;
 
   Post(
-      [this.username = "st-hol",
+      [this.username = "Ayantika",
       this.userImagePath = "assets/images/avatar.jpg",
       this.contentImagePath = "assets/images/post.jpg",
-      this.description = " Having rest in the woods :)",
+      this.description = " new cool FikFok",
       this.postedTime = "3 hours ago"])
       : this.tag = Utility.getRandomTag(9);
 

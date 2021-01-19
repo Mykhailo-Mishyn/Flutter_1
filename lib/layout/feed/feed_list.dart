@@ -28,7 +28,7 @@ class _FeedListState extends State<FeedList> {
         primarySwatch: BlackPrimary.primaryBlack,
       ),
       home: DefaultTabController(
-        length: 3,
+        length: 2,
         child: Scaffold(
           backgroundColor: Colors.black54,
           appBar: AppBar(
@@ -48,16 +48,9 @@ class _FeedListState extends State<FeedList> {
         Align(
             alignment: Alignment.centerLeft,
             child: Tab(
-                icon: Icon(
-              Icons.camera_alt,
-              color: Colors.white,
-            ))),
-        Align(
-            alignment: Alignment.center,
-            child: Tab(
                 icon: Text(
-              'Fluttergram',
-              style: TextStyle(fontFamily: 'Billabong', fontSize: 27),
+              'FikFok',
+              style: TextStyle(fontFamily: 'Futura', fontSize: 27),
             ))),
         Align(
             alignment: Alignment.centerRight,
@@ -73,9 +66,6 @@ class _FeedListState extends State<FeedList> {
   TabBarView _buildTabBarView() {
     return TabBarView(
       children: [
-        //left
-        dummyTestExpandedClass(),
-
         //main
         CustomScrollView(
           slivers: <Widget>[
@@ -91,55 +81,14 @@ class _FeedListState extends State<FeedList> {
     );
   }
 
-  Center dummyTestExpandedClass() {
-    return Center(
-      child: Column(
-        children: <Widget>[
-          Container(
-            color: Colors.blue,
-            height: 100,
-            width: 100,
-          ),
-          Expanded(
-            child: Icon(
-              Icons.camera_alt,
-              color: Colors.white,
-              size: 300,
-            ),
-          ),
-          Container(
-            color: Colors.red,
-            height: 100,
-            width: 100,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Row dummyTestSpacerClass() {
-    return Row(
-      children: <Widget>[
-        Text('1st',
-            style: TextStyle(
-                fontFamily: 'Billabong', fontSize: 27, color: Colors.white)),
-        Spacer(), // Defaults to a flex of one.
-        Text('2nd',
-            style: TextStyle(
-                fontFamily: 'Billabong', fontSize: 27, color: Colors.white)),
-        // Gives twice the space between Middle and End than Begin and Middle.
-        Spacer(flex: 2),
-        Text('3rd',
-            style: TextStyle(
-                fontFamily: 'Billabong', fontSize: 27, color: Colors.white)),
-      ],
-    );
+  Image dummyTestSpacerClass() {
+    return Image.asset("assets/images/tab.jpg");
   }
 
   Widget buildStories() {
     return SliverToBoxAdapter(
       child: Container(
-        height: 65,
+        height: 75,
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: _populateStoryList(),
@@ -179,7 +128,8 @@ class _ClickableStory extends StatelessWidget {
           tag: story.tag,
           child: GestureDetector(
               onTap: () {
-                final model = Provider.of<StorySeenModel>(context,  listen: false);
+                final model =
+                    Provider.of<StorySeenModel>(context, listen: false);
                 model.incrementViewCount(story.tag);
 
                 Navigator.push(
@@ -192,33 +142,3 @@ class _ClickableStory extends StatelessWidget {
     );
   }
 }
-
-
-// @deprecated
-// SliverAppBar buildSliverAppBar() {
-//   return SliverAppBar(
-//     pinned: true,
-//     backgroundColor: Colors.black54,
-//     centerTitle: true,
-//     leading: IconButton(
-//       icon: Icon(
-//         Icons.camera_alt,
-//         color: Colors.white,
-//       ),
-//       onPressed: () {},
-//     ),
-//     title: Text(
-//       'Fluttergram',
-//       style: TextStyle(fontFamily: 'Billabong'),
-//     ),
-//     actions: <Widget>[
-//       IconButton(
-//         icon: Icon(
-//           Icons.send,
-//           color: Colors.white,
-//         ),
-//         onPressed: () {},
-//       )
-//     ],
-//   );
-// }

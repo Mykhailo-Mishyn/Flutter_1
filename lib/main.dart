@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
               create: (context) => StorySeenModel()),
         ],
         child: MaterialApp(
-            title: 'st-hol instagram copy (fluttergram)',
+            title: 'FikFok',
             theme: ThemeData(
               primarySwatch: BlackPrimary.primaryBlack,
               visualDensity: VisualDensity.adaptivePlatformDensity,
