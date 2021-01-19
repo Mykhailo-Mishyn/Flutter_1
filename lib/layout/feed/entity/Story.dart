@@ -11,9 +11,9 @@ class Story extends StatefulWidget {
   final String contentImagePath;
 
   Story(
-      [this.username = 'st-hol',
+      [this.username = 'Ayantika',
       this.contentImagePath = 'assets/images/avatar.jpg'])
-      : this.tag = Utility.getRandomTag(9);
+      : this.tag = Utility.getRandomTag(4);
 
   @override
   _StoryState createState() => _StoryState();
@@ -60,8 +60,13 @@ class _StoryState extends State<Story> with SingleTickerProviderStateMixin {
               Container(
                   margin: EdgeInsets.symmetric(horizontal: 0, vertical: 3),
                   child: Text(
+<<<<<<< HEAD:lib/layout/feed/entity/Story.dart
                     'st_hol',
                     style: TextStyle(fontSize: 10),
+=======
+                    'Ayantika',
+                    style: TextStyle(color: Colors.white, fontSize: 10),
+>>>>>>> ffcdc6da6f05d051cc54d7874f923184fad6d898:lib/layout/feed/entity/story.dart
                   ))
             ],
           ));

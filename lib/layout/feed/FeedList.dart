@@ -33,7 +33,7 @@ class _FeedListState extends State<FeedList> {
       //   primarySwatch: BlackPrimary.primaryBlack,
       // ),
       home: DefaultTabController(
-        length: 3,
+        length: 2,
         child: Scaffold(
           backgroundColor:
               Utility.defineColorDependingOnTheme(isDarkThemeActive),
@@ -56,6 +56,7 @@ class _FeedListState extends State<FeedList> {
         Align(
             alignment: Alignment.centerLeft,
             child: Tab(
+<<<<<<< HEAD:lib/layout/feed/FeedList.dart
                 icon: Icon(
               Icons.camera_alt,
             ))),
@@ -69,6 +70,11 @@ class _FeedListState extends State<FeedList> {
                   fontSize: 27,
                   color:
                       Utility.defineColorDependingOnTheme(!isDarkThemeActive)),
+=======
+                icon: Text(
+              'FikFok',
+              style: TextStyle(fontFamily: 'Futura', fontSize: 27),
+>>>>>>> ffcdc6da6f05d051cc54d7874f923184fad6d898:lib/layout/feed/feed_list.dart
             ))),
         Align(
             alignment: Alignment.centerRight,
@@ -83,9 +89,6 @@ class _FeedListState extends State<FeedList> {
   TabBarView _buildTabBarView() {
     return TabBarView(
       children: [
-        //left
-        dummyTestExpandedClass(),
-
         //main
         CustomScrollView(
           slivers: <Widget>[
@@ -114,6 +117,7 @@ class _FeedListState extends State<FeedList> {
     );
   }
 
+<<<<<<< HEAD:lib/layout/feed/FeedList.dart
   Center dummyTestExpandedClass() {
     return Center(
       child: Column(
@@ -139,11 +143,16 @@ class _FeedListState extends State<FeedList> {
     );
   }
 
+=======
+  Image dummyTestSpacerClass() {
+    return Image.asset("assets/images/tab.jpg");
+  }
+>>>>>>> ffcdc6da6f05d051cc54d7874f923184fad6d898:lib/layout/feed/feed_list.dart
 
   Widget buildStories() {
     return SliverToBoxAdapter(
       child: Container(
-        height: 65,
+        height: 75,
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: _populateStoryList(),
@@ -197,6 +206,7 @@ class _ClickableStory extends StatelessWidget {
     );
   }
 }
+<<<<<<< HEAD:lib/layout/feed/FeedList.dart
 
 // @deprecated
 // SliverAppBar buildSliverAppBar() {
@@ -226,3 +236,5 @@ class _ClickableStory extends StatelessWidget {
 //     ],
 //   );
 // }
+=======
+>>>>>>> ffcdc6da6f05d051cc54d7874f923184fad6d898:lib/layout/feed/feed_list.dart

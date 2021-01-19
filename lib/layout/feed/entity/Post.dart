@@ -22,11 +22,15 @@ class Post extends StatefulWidget {
   int nLikes = 0;
 
   Post(
-      [this.username = "st-hol",
+      [this.username = "Ayantika",
       this.userImagePath = "assets/images/avatar.jpg",
       this.contentImagePath = "assets/images/post.jpg",
+<<<<<<< HEAD:lib/layout/feed/entity/Post.dart
       this.isImageSrcNetwork = false,
       this.description = " Having rest in the woods :)",
+=======
+      this.description = " new cool FikFok",
+>>>>>>> ffcdc6da6f05d051cc54d7874f923184fad6d898:lib/layout/feed/entity/post.dart
       this.postedTime = "3 hours ago"])
       : this.tag = Utility.getRandomTag(9);
 

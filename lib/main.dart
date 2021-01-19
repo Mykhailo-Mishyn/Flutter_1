@@ -33,6 +33,7 @@ class _FluttergramAppState extends State<FluttergramApp> {
           ChangeNotifierProvider<StorySeenModel>(
               create: (context) => StorySeenModel()),
         ],
+<<<<<<< HEAD
         child: Consumer<ThemeNotifier>(
           builder: (context, ThemeNotifier notifier, child) {
             return MaterialApp(
@@ -90,6 +91,15 @@ class _FluttergramAppState extends State<FluttergramApp> {
         setState(() {
           _currentIndex = val;
         });
+=======
+        child: MaterialApp(
+            title: 'FikFok',
+            theme: ThemeData(
+              primarySwatch: BlackPrimary.primaryBlack,
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+            ),
+            home: FeedList()));
+>>>>>>> ffcdc6da6f05d051cc54d7874f923184fad6d898
   }
 }
 

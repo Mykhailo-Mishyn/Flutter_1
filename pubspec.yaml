@@ -28,9 +28,9 @@ flutter:
   assets:
     - assets/images/avatar.jpg
     - assets/images/post.jpg
+    - assets/images/tab.jpg
 
   fonts:
-    - family: Billabong
+    - family: Futura
       fonts:
-        - asset: assets/fonts/Billabong.ttf
-
+        - asset: assets/fonts/Futura.otf

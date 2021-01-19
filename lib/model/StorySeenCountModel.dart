@@ -67,7 +67,7 @@ class StorySeenModel extends ChangeNotifier {
   /// init stub
   static List<Story> _initStories() {
     List<Story> stories = [];
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < 4; i++) {
       stories.add(Story());
     }
     return stories;
