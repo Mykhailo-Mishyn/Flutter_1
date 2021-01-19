@@ -8,8 +8,10 @@ class InitialDiagramScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _buildButtonColumn(context, Icons.filter_1, '/first', PaintingStyle.fill),
-          _buildButtonColumn(context, Icons.filter_2, '/second', PaintingStyle.stroke),
+          _buildButtonColumn(
+              context, Icons.trip_origin, '/full', PaintingStyle.fill),
+          _buildButtonColumn(
+              context, Icons.data_usage, '/custom', PaintingStyle.stroke),
         ],
       ),
     );
@@ -27,10 +29,8 @@ class InitialDiagramScreen extends StatelessWidget {
             Navigator.pushNamed(
               context,
               route,
-              arguments: ScreenArguments(
-                  "[$route] diagram title.",
-                  "You made choice [$route].",
-                  paintingStyle),
+              arguments: ScreenArguments("[$route] statistics.",
+                  "Current statistic [$route].", paintingStyle),
             );
           },
           icon: Icon(icon),

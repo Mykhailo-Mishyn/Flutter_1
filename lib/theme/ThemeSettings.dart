@@ -4,17 +4,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 ThemeData light = ThemeData(
     brightness: Brightness.light,
-    primarySwatch: Colors.lime,
-    accentColor: Colors.limeAccent,
-    scaffoldBackgroundColor: Color(0xfff1f1f1)
-);
+    primarySwatch: Colors.red,
+    accentColor: Colors.redAccent,
+    scaffoldBackgroundColor: Color(0xfff1f1f1));
 
 ThemeData dark = ThemeData(
-  brightness: Brightness.dark,
-  primarySwatch: BlackPrimary.primaryBlack,
-  accentColor: Colors.red,
-  scaffoldBackgroundColor: BlackPrimary.primaryBlack
-);
+    brightness: Brightness.dark,
+    primarySwatch: BlackPrimary.primaryBlack,
+    accentColor: Colors.red,
+    scaffoldBackgroundColor: BlackPrimary.primaryBlack);
 
 class ThemeNotifier extends ChangeNotifier {
   final String key = "theme";

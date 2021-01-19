@@ -60,13 +60,8 @@ class _StoryState extends State<Story> with SingleTickerProviderStateMixin {
               Container(
                   margin: EdgeInsets.symmetric(horizontal: 0, vertical: 3),
                   child: Text(
-<<<<<<< HEAD:lib/layout/feed/entity/Story.dart
-                    'st_hol',
-                    style: TextStyle(fontSize: 10),
-=======
                     'Ayantika',
-                    style: TextStyle(color: Colors.white, fontSize: 10),
->>>>>>> ffcdc6da6f05d051cc54d7874f923184fad6d898:lib/layout/feed/entity/story.dart
+                    style: TextStyle(fontSize: 10),
                   ))
             ],
           ));

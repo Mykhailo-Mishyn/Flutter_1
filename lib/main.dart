@@ -33,12 +33,11 @@ class _FluttergramAppState extends State<FluttergramApp> {
           ChangeNotifierProvider<StorySeenModel>(
               create: (context) => StorySeenModel()),
         ],
-<<<<<<< HEAD
         child: Consumer<ThemeNotifier>(
           builder: (context, ThemeNotifier notifier, child) {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
-              title: 'st-hol instagram copy (fluttergram)',
+              title: 'FikFok',
               theme: notifier.isDarkTheme ? dark : light,
               home: home(context),
             );
@@ -48,58 +47,48 @@ class _FluttergramAppState extends State<FluttergramApp> {
 
   Scaffold home(BuildContext context) {
     return Scaffold(
-              body: IndexedStack(
-                index: _currentIndex,
-                children: <Widget>[
-                  Navigator(
-                    key: _feedScreen,
-                    onGenerateRoute: (route) => MaterialPageRoute(
-                      settings: route,
-                      builder: (context) => FeedList(),
-                    ),
-                  ),
-                  Navigator(
-                    key: _diagramScreen,
-                    initialRoute: '/',
-                    onGenerateRoute: generateRouteForDiagramsScreen,
-                    onUnknownRoute: (settings) => MaterialPageRoute(
-                        builder: (context) => UndefinedView(
-                          name: settings.name,
-                        )),
-                  ),
-                ],
-              ),
-              bottomNavigationBar: BottomNavigationBar(
-                type: BottomNavigationBarType.fixed,
-                currentIndex: _currentIndex,
-                onTap: (val) => _onTap(val, context),
-                items: [
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.library_books),
-                    title: Text('Main'),
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.list),
-                    title: Text('Diagram'),
-                  ),
-                ],
-              ),
-            );
+      body: IndexedStack(
+        index: _currentIndex,
+        children: <Widget>[
+          Navigator(
+            key: _feedScreen,
+            onGenerateRoute: (route) => MaterialPageRoute(
+              settings: route,
+              builder: (context) => FeedList(),
+            ),
+          ),
+          Navigator(
+            key: _diagramScreen,
+            initialRoute: '/',
+            onGenerateRoute: generateRouteForDiagramsScreen,
+            onUnknownRoute: (settings) => MaterialPageRoute(
+                builder: (context) => UndefinedView(
+                      name: settings.name,
+                    )),
+          ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _currentIndex,
+        onTap: (val) => _onTap(val, context),
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.library_books),
+            title: Text('Main'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            title: Text('Diagram'),
+          ),
+        ],
+      ),
+    );
   }
 
   void _onTap(int val, BuildContext context) {
-        setState(() {
-          _currentIndex = val;
-        });
-=======
-        child: MaterialApp(
-            title: 'FikFok',
-            theme: ThemeData(
-              primarySwatch: BlackPrimary.primaryBlack,
-              visualDensity: VisualDensity.adaptivePlatformDensity,
-            ),
-            home: FeedList()));
->>>>>>> ffcdc6da6f05d051cc54d7874f923184fad6d898
+    setState(() {
+      _currentIndex = val;
+    });
   }
 }
-

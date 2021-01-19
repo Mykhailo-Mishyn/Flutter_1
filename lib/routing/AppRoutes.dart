@@ -9,8 +9,8 @@ Route<dynamic> generateRouteForDiagramsScreen(RouteSettings settings) {
   switch (settings.name) {
     case '/':
       return MaterialPageRoute(builder: (context) => InitialDiagramScreen());
-    case '/first':
-    case '/second':
+    case '/full':
+    case '/custom':
       final ScreenArguments args = settings.arguments;
       return MaterialPageRoute(
         builder: (context) {

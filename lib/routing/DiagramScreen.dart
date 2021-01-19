@@ -20,7 +20,7 @@ class DiagramScreen extends StatelessWidget {
         title: Text(
           title,
           style: TextStyle(
-            fontFamily: 'Billabong',
+            fontFamily: 'Futora',
             fontSize: 22,
           ),
         ),

@@ -56,25 +56,13 @@ class _FeedListState extends State<FeedList> {
         Align(
             alignment: Alignment.centerLeft,
             child: Tab(
-<<<<<<< HEAD:lib/layout/feed/FeedList.dart
-                icon: Icon(
-              Icons.camera_alt,
-            ))),
-        Align(
-            alignment: Alignment.center,
-            child: Tab(
                 icon: Text(
-              'Fluttergram',
+              'FikFok',
               style: TextStyle(
-                  fontFamily: 'Billabong',
+                  fontFamily: 'Futura',
                   fontSize: 27,
                   color:
                       Utility.defineColorDependingOnTheme(!isDarkThemeActive)),
-=======
-                icon: Text(
-              'FikFok',
-              style: TextStyle(fontFamily: 'Futura', fontSize: 27),
->>>>>>> ffcdc6da6f05d051cc54d7874f923184fad6d898:lib/layout/feed/feed_list.dart
             ))),
         Align(
             alignment: Alignment.centerRight,
@@ -116,38 +104,6 @@ class _FeedListState extends State<FeedList> {
       ],
     );
   }
-
-<<<<<<< HEAD:lib/layout/feed/FeedList.dart
-  Center dummyTestExpandedClass() {
-    return Center(
-      child: Column(
-        children: <Widget>[
-          Container(
-            color: Colors.blue,
-            height: 100,
-            width: 100,
-          ),
-          Expanded(
-            child: Icon(
-              Icons.camera_alt,
-              size: 300,
-            ),
-          ),
-          Container(
-            color: Colors.red,
-            height: 100,
-            width: 100,
-          ),
-        ],
-      ),
-    );
-  }
-
-=======
-  Image dummyTestSpacerClass() {
-    return Image.asset("assets/images/tab.jpg");
-  }
->>>>>>> ffcdc6da6f05d051cc54d7874f923184fad6d898:lib/layout/feed/feed_list.dart
 
   Widget buildStories() {
     return SliverToBoxAdapter(
@@ -206,35 +162,3 @@ class _ClickableStory extends StatelessWidget {
     );
   }
 }
-<<<<<<< HEAD:lib/layout/feed/FeedList.dart
-
-// @deprecated
-// SliverAppBar buildSliverAppBar() {
-//   return SliverAppBar(
-//     pinned: true,
-//     backgroundColor: Colors.black54,
-//     centerTitle: true,
-//     leading: IconButton(
-//       icon: Icon(
-//         Icons.camera_alt,
-//         color: Colors.white,
-//       ),
-//       onPressed: () {},
-//     ),
-//     title: Text(
-//       'Fluttergram',
-//       style: TextStyle(fontFamily: 'Billabong'),
-//     ),
-//     actions: <Widget>[
-//       IconButton(
-//         icon: Icon(
-//           Icons.send,
-//           color: Colors.white,
-//         ),
-//         onPressed: () {},
-//       )
-//     ],
-//   );
-// }
-=======
->>>>>>> ffcdc6da6f05d051cc54d7874f923184fad6d898:lib/layout/feed/feed_list.dart

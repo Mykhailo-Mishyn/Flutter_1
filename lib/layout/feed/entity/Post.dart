@@ -25,12 +25,8 @@ class Post extends StatefulWidget {
       [this.username = "Ayantika",
       this.userImagePath = "assets/images/avatar.jpg",
       this.contentImagePath = "assets/images/post.jpg",
-<<<<<<< HEAD:lib/layout/feed/entity/Post.dart
       this.isImageSrcNetwork = false,
-      this.description = " Having rest in the woods :)",
-=======
       this.description = " new cool FikFok",
->>>>>>> ffcdc6da6f05d051cc54d7874f923184fad6d898:lib/layout/feed/entity/post.dart
       this.postedTime = "3 hours ago"])
       : this.tag = Utility.getRandomTag(9);
 
@@ -82,7 +78,7 @@ class _PostState extends State<Post> {
         children: <Widget>[
           Row(
             children: <Widget>[
-              CircleAvatar(child: ClipOval(child:_buildAvatar())),
+              CircleAvatar(child: ClipOval(child: _buildAvatar())),
               Container(
                 margin: EdgeInsets.only(left: 10),
                 child: Text(
@@ -194,13 +190,13 @@ class _PostState extends State<Post> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => ReactionScreen()),
-    ).then((value) => Scaffold.of(context)
-      ..removeCurrentSnackBar()
-      ..showSnackBar(SnackBar(
-          content:
-              Text("You reacted with [" + "$value" + "] on this Post."))))
-    .catchError((err) => throw "Can not make reaction.");
-
+    )
+        .then((value) => Scaffold.of(context)
+          ..removeCurrentSnackBar()
+          ..showSnackBar(SnackBar(
+              content:
+                  Text("You reacted with [" + "$value" + "] on this Post."))))
+        .catchError((err) => throw "Can not make reaction.");
   }
 
   Widget buildSubtitle() {

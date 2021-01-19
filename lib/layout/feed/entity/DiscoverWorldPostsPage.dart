@@ -13,9 +13,9 @@ class PostsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Discover world with Fluttergram",
+          "FikFok views",
           style: TextStyle(
-            fontFamily: 'Billabong',
+            fontFamily: 'Futora',
             fontSize: 22,
           ),
         ),
